@@ -3,12 +3,31 @@
   padding: 0;
 }
 
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+button {
+  padding: 10px 15px;
+  border-radius: 15px;
+}
+
+#showForm {
+  display: block;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .books {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .book {
   flex: 0 1 auto;
   width: 200px;
+  padding: 10px;
   border: 1px solid black;
 }
