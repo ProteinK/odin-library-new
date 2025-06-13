@@ -1,4 +1,14 @@
 const myLibrary = [];
+const formTitle = document.querySelector('#title');
+const formAuthor = document.querySelector('#author');
+const formPages = document.querySelector('#pages');
+const showButton = document.querySelector('#showForm');
+const addButton = document.querySelector('#addBook');
+const formDialog = document.querySelector('#formDialog');
+
+showButton.addEventListener('click', () => {
+  formDialog.showModal();
+});
 
 function Book(title, author, pages) {
   this.title = title;
@@ -14,6 +24,8 @@ function addBookToLibrary(title, author, pages) {
 
 function displayBooks() {
   const books = document.querySelector('.books');
+  books.innerHTML = '';
+
   for (let b of myLibrary) {
     const el = document.createElement('div');
     el.classList.add('book');
@@ -29,6 +41,16 @@ function displayBooks() {
     books.appendChild(el);
   }
 }
+
+addButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  addBookToLibrary(formTitle.value, formAuthor.value, formPages.value);
+  formDialog.close();
+  formTitle.value = '';
+  formAuthor.value = '';
+  formPages.value = '';
+  displayBooks();
+});
 
 addBookToLibrary("test", "test author", 500);
 addBookToLibrary("Moby-Dick", "Herman Melville", 635);
