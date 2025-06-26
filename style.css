@@ -20,6 +20,12 @@ button {
   margin-right: auto;
 }
 
+#formDialog {
+  position: fixed;
+  top: 50px;
+  left: 50px;
+}
+
 .books {
   display: flex;
   flex-wrap: wrap;

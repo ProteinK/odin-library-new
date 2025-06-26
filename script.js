@@ -38,6 +38,18 @@ function displayBooks() {
     el.appendChild(titleP);
     el.appendChild(authorP);
     el.appendChild(pagesP);
+    el.setAttribute('data-id', b.id);
+
+    const btn = document.createElement('button');
+    btn.addEventListener('click', (event) => {
+      const id = event.target.parentNode.dataset.id;
+      const index = myLibrary.findIndex(b => b.id === id);
+      myLibrary.splice(index, 1);
+      displayBooks();
+    });
+    btn.textContent = 'Remove';
+    el.appendChild(btn);
+
     books.appendChild(el);
   }
 }
