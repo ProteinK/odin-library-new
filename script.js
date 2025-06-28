@@ -55,6 +55,16 @@ function displayBooks() {
     btn.textContent = 'Remove';
     el.appendChild(btn);
 
+    const btnRead = document.createElement('button');
+    btnRead.addEventListener('click', (event) => {
+      const id = event.target.parentNode.dataset.id;
+      const book = myLibrary.find(b => b.id === id);
+      book.read = !book.read;
+      displayBooks();
+    });
+    btnRead.textContent = 'Read';
+    el.appendChild(btnRead);
+
     books.appendChild(el);
   }
 }
