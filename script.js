@@ -2,6 +2,7 @@ const myLibrary = [];
 const formTitle = document.querySelector('#title');
 const formAuthor = document.querySelector('#author');
 const formPages = document.querySelector('#pages');
+const formRead = document.querySelector('#read');
 const showButton = document.querySelector('#showForm');
 const addButton = document.querySelector('#addBook');
 const formDialog = document.querySelector('#formDialog');
@@ -10,15 +11,16 @@ showButton.addEventListener('click', () => {
   formDialog.showModal();
 });
 
-function Book(title, author, pages) {
+function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
+  this.read = read;
   this.id = crypto.randomUUID();
 }
 
-function addBookToLibrary(title, author, pages) {
-  const book = new Book(title, author, pages);
+function addBookToLibrary(title, author, pages, read) {
+  const book = new Book(title, author, pages, read);
   myLibrary.push(book);
 }
 
@@ -32,12 +34,15 @@ function displayBooks() {
     const titleP = document.createElement('p');
     const authorP = document.createElement('p');
     const pagesP = document.createElement('p');
+    const readP = document.createElement('p');
     titleP.textContent = b.title;
     authorP.textContent = b.author;
     pagesP.textContent = b.pages;
+    readP.textContent = b.read ? 'Read' : 'Not read';
     el.appendChild(titleP);
     el.appendChild(authorP);
     el.appendChild(pagesP);
+    el.appendChild(readP);
     el.setAttribute('data-id', b.id);
 
     const btn = document.createElement('button');
@@ -56,7 +61,8 @@ function displayBooks() {
 
 addButton.addEventListener('click', (event) => {
   event.preventDefault();
-  addBookToLibrary(formTitle.value, formAuthor.value, formPages.value);
+  console.log(formRead.checked);
+  addBookToLibrary(formTitle.value, formAuthor.value, formPages.value, formRead.checked);
   formDialog.close();
   formTitle.value = '';
   formAuthor.value = '';
@@ -64,8 +70,8 @@ addButton.addEventListener('click', (event) => {
   displayBooks();
 });
 
-addBookToLibrary("test", "test author", 500);
-addBookToLibrary("Moby-Dick", "Herman Melville", 635);
-addBookToLibrary("To Kill a Mockingbird", "Harper Lee", 281);
+addBookToLibrary("test", "test author", 500, false);
+addBookToLibrary("Moby-Dick", "Herman Melville", 635, false);
+addBookToLibrary("To Kill a Mockingbird", "Harper Lee", 281, true);
 
 displayBooks();
