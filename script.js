@@ -45,15 +45,6 @@ function displayBooks() {
     el.appendChild(readP);
     el.setAttribute('data-id', b.id);
 
-    const btn = document.createElement('button');
-    btn.addEventListener('click', (event) => {
-      const id = event.target.parentNode.dataset.id;
-      const index = myLibrary.findIndex(b => b.id === id);
-      myLibrary.splice(index, 1);
-      displayBooks();
-    });
-    btn.textContent = 'Remove';
-    el.appendChild(btn);
 
     const btnRead = document.createElement('button');
     btnRead.addEventListener('click', (event) => {
@@ -63,7 +54,19 @@ function displayBooks() {
       displayBooks();
     });
     btnRead.textContent = 'Read';
+    btnRead.id = 'readButton';
     el.appendChild(btnRead);
+
+    const btn = document.createElement('button');
+    btn.addEventListener('click', (event) => {
+      const id = event.target.parentNode.dataset.id;
+      const index = myLibrary.findIndex(b => b.id === id);
+      myLibrary.splice(index, 1);
+      displayBooks();
+    });
+    btn.textContent = 'Remove';
+    btn.id = 'removeButton';
+    el.appendChild(btn);
 
     books.appendChild(el);
   }
