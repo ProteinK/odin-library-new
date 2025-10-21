@@ -1,38 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <title>Odin Library</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
-  <title>Odin Library</title>
-</head>
+  <body>
+    <h1>Library</h1>
 
-<body>
-  <h1>Library</h1>
-
-  <dialog id="formDialog">
-    <form>
-      <div class="form-elements">
-        <div class="form-element"><label for="title">Title:</label><input type="text" name="title" id="title"></div>
-        <div class="form-element"><label for="author">Author:</label><input type="text" name="author" id="author"></div>
-        <div class="form-element"><label for="pages">Pages:</label><input type="tel" name="pages" id="pages"></div>
-        <div class="form-element"><label for="read">Read:</label><input type="checkbox" name="read" id="read">
+    <dialog id="formDialog">
+      <form>
+        <div class="form-elements">
+          <div class="form-element">
+            <label for="title">Title:</label
+            ><input type="text" name="title" id="title" />
+          </div>
+          <div class="form-element">
+            <label for="author">Author:</label
+            ><input type="text" name="author" id="author" required />
+          </div>
+          <div class="form-element">
+            <label for="pages">Pages:</label
+            ><input type="tel" name="pages" id="pages" />
+          </div>
+          <div class="form-element">
+            <label for="read">Read:</label
+            ><input type="checkbox" name="read" id="read" />
+          </div>
         </div>
-      </div>
 
-      <div class="formButtons">
-        <button value="cancel" formmethod="dialog">Cancel</button>
-        <button id="addBook" value="default">Add</button>
-      </div>
-    </form>
-  </dialog>
+        <div class="formButtons">
+          <button id="cancel" value="cancel" formmethod="dialog">Cancel</button>
+          <button id="addBook" value="default">Add</button>
+        </div>
+      </form>
+    </dialog>
 
-  <button id="showForm">New Book</button>
+    <button id="showForm">New Book</button>
 
-  <div class="books">
-  </div>
-</body>
-
+    <div class="books"></div>
+  </body>
 </html>

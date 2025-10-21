@@ -1,13 +1,14 @@
 const myLibrary = [];
-const formTitle = document.querySelector('#title');
-const formAuthor = document.querySelector('#author');
-const formPages = document.querySelector('#pages');
-const formRead = document.querySelector('#read');
-const showButton = document.querySelector('#showForm');
-const addButton = document.querySelector('#addBook');
-const formDialog = document.querySelector('#formDialog');
+const formTitle = document.querySelector("#title");
+const formAuthor = document.querySelector("#author");
+const formPages = document.querySelector("#pages");
+const formRead = document.querySelector("#read");
+const showButton = document.querySelector("#showForm");
+const addButton = document.querySelector("#addBook");
+const cancelButton = document.querySelector("#cancel");
+const formDialog = document.querySelector("#formDialog");
 
-showButton.addEventListener('click', () => {
+showButton.addEventListener("click", () => {
   formDialog.showModal();
 });
 
@@ -25,62 +26,80 @@ function addBookToLibrary(title, author, pages, read) {
 }
 
 function displayBooks() {
-  const books = document.querySelector('.books');
-  books.innerHTML = '';
+  const books = document.querySelector(".books");
+  books.innerHTML = "";
 
   for (let b of myLibrary) {
-    const el = document.createElement('div');
-    el.classList.add('book');
-    const titleP = document.createElement('p');
-    const authorP = document.createElement('p');
-    const pagesP = document.createElement('p');
-    const readP = document.createElement('p');
+    const el = document.createElement("div");
+    el.classList.add("book");
+    const titleP = document.createElement("p");
+    const authorP = document.createElement("p");
+    const pagesP = document.createElement("p");
+    const readP = document.createElement("p");
     titleP.textContent = b.title;
     authorP.textContent = b.author;
     pagesP.textContent = b.pages;
-    readP.textContent = b.read ? 'Read' : 'Not read';
+    readP.textContent = b.read ? "Read" : "Not read";
     el.appendChild(titleP);
     el.appendChild(authorP);
     el.appendChild(pagesP);
     el.appendChild(readP);
-    el.setAttribute('data-id', b.id);
+    el.setAttribute("data-id", b.id);
 
-
-    const btnRead = document.createElement('button');
-    btnRead.addEventListener('click', (event) => {
+    const btnRead = document.createElement("button");
+    btnRead.addEventListener("click", (event) => {
       const id = event.target.parentNode.dataset.id;
-      const book = myLibrary.find(b => b.id === id);
+      const book = myLibrary.find((b) => b.id === id);
       book.read = !book.read;
       displayBooks();
     });
-    btnRead.textContent = 'Read';
-    btnRead.id = 'readButton';
+    btnRead.textContent = "Read";
+    btnRead.id = "readButton";
     el.appendChild(btnRead);
 
-    const btn = document.createElement('button');
-    btn.addEventListener('click', (event) => {
+    const btn = document.createElement("button");
+    btn.addEventListener("click", (event) => {
       const id = event.target.parentNode.dataset.id;
-      const index = myLibrary.findIndex(b => b.id === id);
+      const index = myLibrary.findIndex((b) => b.id === id);
       myLibrary.splice(index, 1);
       displayBooks();
     });
-    btn.textContent = 'Remove';
-    btn.id = 'removeButton';
+    btn.textContent = "Remove";
+    btn.id = "removeButton";
     el.appendChild(btn);
 
     books.appendChild(el);
   }
 }
 
-addButton.addEventListener('click', (event) => {
+formAuthor.addEventListener("input", (event) => {
+  if (!formAuthor.validity.valueMissing) {
+    formAuthor.setCustomValidity("");
+  }
+});
+
+addButton.addEventListener("click", (event) => {
+  if (formAuthor.validity.valueMissing) {
+    formAuthor.setCustomValidity("The author name must be filled!");
+    return;
+  }
   event.preventDefault();
-  console.log(formRead.checked);
-  addBookToLibrary(formTitle.value, formAuthor.value, formPages.value, formRead.checked);
+  addBookToLibrary(
+    formTitle.value,
+    formAuthor.value,
+    formPages.value,
+    formRead.checked
+  );
   formDialog.close();
-  formTitle.value = '';
-  formAuthor.value = '';
-  formPages.value = '';
+  formTitle.value = "";
+  formAuthor.value = "";
+  formPages.value = "";
   displayBooks();
+});
+
+cancelButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  formDialog.close();
 });
 
 addBookToLibrary("test", "test author", 500, false);
